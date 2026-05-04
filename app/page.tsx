@@ -28,9 +28,7 @@ export default function Home() {
           <Marquee />
         </ScrollSection>
       </div>
-      <ScrollSection>
-        <Stats />
-      </ScrollSection>
+      <Stats />
       <ScrollSection>
         <Projects />
       </ScrollSection>

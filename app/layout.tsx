@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   description:
     "Software developer portfolio with selected projects in frontend, backend, and product-focused delivery.",
   icons: {
-    icon: "/ef-mark.svg",
+    icon: "/ef-mark-light.svg",
   },
   openGraph: {
     title: `${SITE_IDENTITY.name} | ${SITE_IDENTITY.role}`,

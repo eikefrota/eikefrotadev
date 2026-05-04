@@ -1,102 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useSiteLanguage } from "@/app/components/language-provider";
 
-if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-}
-
 export default function Stats() {
-    const sectionRef = useRef<HTMLElement>(null);
     const { content } = useSiteLanguage();
-
-    useEffect(() => {
-        if (!sectionRef.current) return;
-
-        const ctx = gsap.context(() => {
-            const root = sectionRef.current;
-            if (!root) return;
-
-            const leftPanel = root.querySelector<HTMLElement>(".stats-panel-left");
-            const rightPanel = root.querySelector<HTMLElement>(".stats-panel-right");
-
-            const statsItems = gsap.utils.toArray<HTMLElement>(".stats-anim", root);
-            const techItems = gsap.utils.toArray<HTMLElement>(".tech-anim", root);
-
-            const panels: HTMLElement[] = [leftPanel, rightPanel].filter((el): el is HTMLElement => !!el);
-
-            gsap.set(panels, { autoAlpha: 0, y: 40 });
-            gsap.set(statsItems, { autoAlpha: 0, y: 22 });
-            gsap.set(techItems, { autoAlpha: 0, y: 26 });
-
-            const master = gsap.timeline({ paused: true });
-
-            if (panels.length > 0) {
-                master.to(panels, {
-                    autoAlpha: 1,
-                    y: 0,
-                    duration: 0.5,
-                    stagger: 0.08,
-                    ease: "power2.out",
-                });
-            }
-
-            if (statsItems.length > 0) {
-                master.to(
-                    statsItems,
-                    {
-                        autoAlpha: 1,
-                        y: 0,
-                        duration: 0.36,
-                        stagger: 0.03,
-                        ease: "power2.out",
-                    },
-                    panels.length > 0 ? "-=0.18" : 0,
-                );
-            }
-
-            if (techItems.length > 0) {
-                master.to(
-                    techItems,
-                    {
-                        autoAlpha: 1,
-                        y: 0,
-                        duration: 0.32,
-                        stagger: 0.018,
-                        ease: "power2.out",
-                    },
-                    statsItems.length > 0 ? "-=0.22" : panels.length > 0 ? "-=0.12" : 0,
-                );
-            }
-
-            ScrollTrigger.create({
-                trigger: root,
-                start: "top 78%",
-                once: true,
-                invalidateOnRefresh: true,
-                onEnter: () => {
-                    master.play(0);
-                },
-                onRefresh: (self) => {
-                    if (self.progress > 0) {
-                        master.progress(1);
-                    } else {
-                        master.pause(0).progress(0);
-                    }
-                },
-            });
-        }, sectionRef);
-
-        return () => ctx.revert();
-    }, []);
 
     return (
         <section
-            ref={sectionRef}
             id="about"
             className="relative min-w-0 overflow-x-clip  bg-background py-12 text-foreground sm:py-16 md:py-20 lg:py-24 xl:py-28"
         >

@@ -42,18 +42,6 @@ export default function Marquee() {
                     if (row2) tl.to(row2, { x: 120, ease: "none" }, 0);
                 }
 
-                gsap.from(".mobile-service-item", {
-                    opacity: 0,
-                    y: 20,
-                    stagger: 0.1,
-                    duration: 0.8,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: ".mobile-services-grid",
-                        start: "top 85%",
-                    },
-                });
-
                 return () => {};
             });
 
@@ -182,19 +170,6 @@ export default function Marquee() {
                     </div>
                 </div>
 
-                <div className="mobile-services-grid grid grid-cols-1 gap-4 pt-8">
-                    <span className="text-[10px] text-foreground/45 font-mono uppercase tracking-[0.3em] mb-2">
-                        {content.marquee.mobileLabel}
-                    </span>
-                    {content.marquee.mobileItems.map((item) => (
-                        <div key={item} className="mobile-service-item flex items-center gap-3">
-                            <div className="w-1.5 h-1.5 rounded-full bg-foreground/25" />
-                            <span className="text-lg text-foreground/60 font-medium tracking-tight whitespace-nowrap overflow-hidden text-ellipsis">
-                                {item}
-                            </span>
-                        </div>
-                    ))}
-                </div>
             </div>
         </section>
     );
