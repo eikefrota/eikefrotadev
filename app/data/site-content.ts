@@ -460,7 +460,7 @@ const siteContentByLocale: Record<SiteLocale, LocaleContent> = {
             sectionAriaLabel: "Projects",
             mobileTitle: "Featured Work",
             mobileDescription:
-                "Three public projects that show how I currently work across frontend, mobile-first flows, and product-oriented implementation.",
+                "Four public projects that show how I currently work across frontend, mobile-first flows, and product-oriented implementation.",
             desktopEyebrow: "Recent work",
             desktopTitleLine1: "Featured",
             desktopTitleLine2: "Projects",
@@ -708,7 +708,7 @@ const siteContentByLocale: Record<SiteLocale, LocaleContent> = {
             sectionAriaLabel: "Projetos",
             mobileTitle: "Projetos em Destaque",
             mobileDescription:
-                "Três projetos públicos que mostram como eu trabalho hoje entre frontend, fluxos mobile-first e implementação orientada a produto.",
+                "Quatro projetos públicos que mostram como eu trabalho hoje entre frontend, fluxos mobile-first e implementação orientada a produto.",
             desktopEyebrow: "Trabalhos recentes",
             desktopTitleLine1: "Projetos",
             desktopTitleLine2: "em Destaque",

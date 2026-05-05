@@ -34,6 +34,43 @@ type ProjectDefinition = {
 
 const projectDefinitions: readonly ProjectDefinition[] = [
     {
+        slug: "shapeon",
+        title: "ShapeOn",
+        role: {
+            en: "Frontend Development",
+            "pt-BR": "Desenvolvimento Frontend",
+        },
+        description: {
+            en: "I built ShapeOn as a high-impact landing page for a supplement store, focused on strong visual positioning, fast product discovery, and direct WhatsApp conversion.",
+            "pt-BR":
+                "Desenvolvi o ShapeOn como uma landing page de impacto para uma loja de suplementos, com foco em posicionamento visual forte, descoberta rápida de produtos e conversão direta pelo WhatsApp.",
+        },
+        highlights: {
+            en: [
+                "I created a dark, performance-oriented visual direction aligned with the supplement and fitness market.",
+                "I structured the page around a persuasive hero, product categories, trust points, testimonials, and contact flow.",
+                "I connected product and CTA actions to WhatsApp to reduce friction between interest and purchase intent.",
+                "I used React, Vite, TypeScript, Tailwind CSS, shadcn/ui, Lucide icons, and Motion for a polished responsive experience.",
+            ],
+            "pt-BR": [
+                "Criei uma direção visual escura e orientada a performance, alinhada ao mercado fitness e de suplementos.",
+                "Estruturei a página com hero persuasivo, categorias de produto, pontos de confiança, depoimentos e fluxo de contato.",
+                "Conectei produtos e chamadas de ação ao WhatsApp para reduzir o atrito entre interesse e intenção de compra.",
+                "Usei React, Vite, TypeScript, Tailwind CSS, shadcn/ui, ícones Lucide e Motion para entregar uma experiência responsiva mais refinada.",
+            ],
+        },
+        tech: ["React", "Vite", "TypeScript", "Tailwind CSS"],
+        github: "https://github.com/eikefrota/shapeon",
+        live: null,
+        featured: true,
+        year: "2026",
+        image: "/images/projects/shapeon/mockup-shapeon-01.png",
+        status: {
+            en: "Public repository",
+            "pt-BR": "Repositório público",
+        },
+    },
+    {
         slug: "quizdev",
         title: "QuizDev",
         role: {
@@ -64,7 +101,7 @@ const projectDefinitions: readonly ProjectDefinition[] = [
         live: null,
         featured: true,
         year: "2025",
-        image: "/images/projects/quizdev.webp",
+        image: "/images/projects/quizdev/quizdev.webp",
         status: {
             en: "Public repository",
             "pt-BR": "Repositório público",
@@ -101,7 +138,7 @@ const projectDefinitions: readonly ProjectDefinition[] = [
         live: "https://fastdish.vercel.app/",
         featured: true,
         year: "2025",
-        image: "/images/projects/fastdish.webp",
+        image: "/images/projects/fastdish/fastdish.webp",
         status: {
             en: "Live demo",
             "pt-BR": "Demo online",
@@ -138,7 +175,7 @@ const projectDefinitions: readonly ProjectDefinition[] = [
         live: "https://frotagourmet.netlify.app",
         featured: true,
         year: "2024",
-        image: "/images/projects/frotas-gourmet.webp",
+        image: "/images/projects/frotasgourmet/frotas-gourmet.webp",
         status: {
             en: "Live demo",
             "pt-BR": "Demo online",
