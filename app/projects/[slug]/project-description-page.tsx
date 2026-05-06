@@ -2,11 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactElement, ReactNode } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { PointerEvent, ReactElement, ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { notFound } from "next/navigation";
 import { getProjectBySlug } from "@/app/data/projects";
 import { useSiteLanguage } from "@/app/components/language-provider";
 import ProjectPageEnter from "@/app/components/project-page-enter";
+import { useHydrationSafeReducedMotion } from "@/app/hooks/use-hydration-safe-reduced-motion";
 
 type ProjectDescriptionPageProps = {
     slug: string;
@@ -96,6 +99,166 @@ function ExternalButton({
     );
 }
 
+const HERO_AUTOPLAY_MS = 2750;
+const HERO_SWIPE_THRESHOLD_PX = 48;
+
+function ProjectHeroCarousel({
+    images,
+    projectTitle,
+    activeIndex,
+    onActiveIndexChange,
+    previousLabel,
+    nextLabel,
+}: {
+    images: readonly string[];
+    projectTitle: string;
+    activeIndex: number;
+    onActiveIndexChange: (index: number) => void;
+    previousLabel: string;
+    nextLabel: string;
+}): ReactElement {
+    const prefersReducedMotion = useHydrationSafeReducedMotion();
+    const [isPointerOver, setIsPointerOver] = useState(false);
+    const pointerStartX = useRef<number | null>(null);
+    const imageCount = images.length;
+    const hasMultipleImages = imageCount > 1;
+
+    const goToNext = useCallback(() => {
+        if (!hasMultipleImages) {
+            return;
+        }
+        onActiveIndexChange((activeIndex + 1) % imageCount);
+    }, [activeIndex, hasMultipleImages, imageCount, onActiveIndexChange]);
+
+    const goToPrevious = useCallback(() => {
+        if (!hasMultipleImages) {
+            return;
+        }
+        onActiveIndexChange((activeIndex - 1 + imageCount) % imageCount);
+    }, [activeIndex, hasMultipleImages, imageCount, onActiveIndexChange]);
+
+    useEffect(() => {
+        if (!hasMultipleImages || prefersReducedMotion || isPointerOver) {
+            return;
+        }
+
+        const intervalId = window.setInterval(goToNext, HERO_AUTOPLAY_MS);
+        return () => window.clearInterval(intervalId);
+    }, [goToNext, hasMultipleImages, isPointerOver, prefersReducedMotion]);
+
+    function handlePointerDown(event: PointerEvent<HTMLDivElement>): void {
+        if (!hasMultipleImages || event.pointerType === "mouse") {
+            return;
+        }
+        pointerStartX.current = event.clientX;
+    }
+
+    function handlePointerUp(event: PointerEvent<HTMLDivElement>): void {
+        if (pointerStartX.current === null) {
+            return;
+        }
+
+        const deltaX = event.clientX - pointerStartX.current;
+        pointerStartX.current = null;
+
+        if (Math.abs(deltaX) < HERO_SWIPE_THRESHOLD_PX) {
+            return;
+        }
+
+        if (deltaX < 0) {
+            goToNext();
+            return;
+        }
+
+        goToPrevious();
+    }
+
+    return (
+        <div
+            className="absolute inset-0 touch-pan-y overflow-hidden"
+            onPointerEnter={(event) => {
+                if (event.pointerType === "mouse") {
+                    setIsPointerOver(true);
+                }
+            }}
+            onPointerLeave={() => {
+                setIsPointerOver(false);
+                pointerStartX.current = null;
+            }}
+            onPointerCancel={() => {
+                pointerStartX.current = null;
+            }}
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+        >
+            {images.map((image, imageIndex) => {
+                const isActive = imageIndex === activeIndex;
+                return (
+                    <Image
+                        key={image}
+                        src={image}
+                        alt=""
+                        fill
+                        priority={imageIndex === 0}
+                        sizes="100vw"
+                        className={`object-cover object-center transition-[opacity,transform] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+                            isActive
+                                ? "scale-100 opacity-100"
+                                : "scale-[1.025] opacity-0"
+                        }`}
+                        aria-hidden={!isActive}
+                    />
+                );
+            })}
+
+            <div
+                className="absolute inset-0 bg-linear-to-b from-black/55 via-black/15 to-black/55 sm:from-black/50 sm:via-black/10 sm:to-black/50"
+                aria-hidden
+            />
+
+            {hasMultipleImages ? (
+                <>
+                    <button
+                        type="button"
+                        onClick={goToPrevious}
+                        className="absolute left-3 top-1/2 z-20 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/20 text-white/85 backdrop-blur-md transition-all duration-300 hover:border-white/45 hover:bg-black/35 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:left-6 sm:h-11 sm:w-11"
+                        aria-label={previousLabel}
+                    >
+                        <ChevronLeft className="h-4 w-4" aria-hidden />
+                    </button>
+                    <button
+                        type="button"
+                        onClick={goToNext}
+                        className="absolute right-3 top-1/2 z-20 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/20 text-white/85 backdrop-blur-md transition-all duration-300 hover:border-white/45 hover:bg-black/35 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:right-6 sm:h-11 sm:w-11"
+                        aria-label={nextLabel}
+                    >
+                        <ChevronRight className="h-4 w-4" aria-hidden />
+                    </button>
+                    <div
+                        className="absolute bottom-20 left-1/2 z-20 flex -translate-x-1/2 gap-2 sm:bottom-24"
+                        aria-label={`${projectTitle} gallery position`}
+                    >
+                        {images.map((image, imageIndex) => (
+                            <button
+                                key={`${image}-dot`}
+                                type="button"
+                                onClick={() => onActiveIndexChange(imageIndex)}
+                                className={`h-1.5 rounded-full transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white ${
+                                    imageIndex === activeIndex
+                                        ? "w-8 bg-white/90"
+                                        : "w-1.5 bg-white/40 hover:bg-white/70"
+                                }`}
+                                aria-label={`Show image ${imageIndex + 1}`}
+                                aria-current={imageIndex === activeIndex}
+                            />
+                        ))}
+                    </div>
+                </>
+            ) : null}
+        </div>
+    );
+}
+
 export default function ProjectDescriptionPage({
     slug,
 }: ProjectDescriptionPageProps): ReactElement {
@@ -106,28 +269,32 @@ export default function ProjectDescriptionPage({
         notFound();
     }
 
-    const { lead, rest } = splitDescription(
-        project.description,
-        content.projectDetail.defaultLead,
-    );
+    const { lead, rest } = project.overviewTitle
+        ? { lead: project.overviewTitle, rest: project.description }
+        : splitDescription(project.description, content.projectDetail.defaultLead);
     const techLine = project.tech.join(" | ");
+    const heroImages = useMemo(
+        () => (project.images.length > 0 ? project.images : [project.image]),
+        [project.image, project.images],
+    );
+    const [activeHeroImageIndex, setActiveHeroImageIndex] = useState(0);
+    const safeHeroImageIndex = Math.min(activeHeroImageIndex, Math.max(heroImages.length - 1, 0));
+    const activeHeroImage = heroImages[safeHeroImageIndex] ?? heroImages[0] ?? project.image;
+    const previousImageLabel = locale === "pt-BR" ? "Imagem anterior" : "Previous image";
+    const nextImageLabel = locale === "pt-BR" ? "Próxima imagem" : "Next image";
 
     return (
         <main className="w-full overflow-x-hidden bg-background text-foreground">
             <ProjectPageEnter>
                 <section className="relative isolate min-h-dvh w-full" aria-label={`${project.title} hero`}>
                     <div className="absolute inset-0">
-                        <Image
-                            src={project.image}
-                            alt=""
-                            fill
-                            priority
-                            sizes="100vw"
-                            className="object-cover object-center"
-                        />
-                        <div
-                            className="absolute inset-0 bg-linear-to-b from-black/55 via-black/15 to-black/55 sm:from-black/50 sm:via-black/10 sm:to-black/50"
-                            aria-hidden
+                        <ProjectHeroCarousel
+                            images={heroImages}
+                            projectTitle={project.title}
+                            activeIndex={safeHeroImageIndex}
+                            onActiveIndexChange={setActiveHeroImageIndex}
+                            previousLabel={previousImageLabel}
+                            nextLabel={nextImageLabel}
                         />
                     </div>
 
@@ -151,7 +318,7 @@ export default function ProjectDescriptionPage({
                                 </Link>
                             </div>
                             <a
-                                href={project.image}
+                                href={activeHeroImage}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="rounded-full border border-white/35 bg-black/20 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.2em] text-white/90 backdrop-blur-sm transition-colors hover:border-white/55 hover:bg-black/35 sm:text-[10px]"
@@ -161,9 +328,6 @@ export default function ProjectDescriptionPage({
                         </div>
 
                         <div className="flex flex-1 flex-col items-center justify-center px-5 pb-28 pt-8 sm:px-8 sm:pb-32 md:px-12">
-                            <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.35em] text-white/60 sm:text-[11px]">
-                                {content.projectDetail.caseStudyLabel} - {project.year}
-                            </p>
                             <h1 className="max-w-[min(100%,56rem)] text-center text-[clamp(1.75rem,5vw,4rem)] font-black uppercase leading-[0.95] tracking-tighter text-white drop-shadow-[0_2px_24px_rgb(0_0_0/0.35)] text-balance">
                                 {project.title}
                             </h1>

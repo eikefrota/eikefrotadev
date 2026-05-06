@@ -4,6 +4,7 @@ export type Project = {
     slug: string;
     title: string;
     role: string;
+    overviewTitle?: string;
     description: string;
     highlights: readonly string[];
     tech: readonly string[];
@@ -12,6 +13,7 @@ export type Project = {
     featured: boolean;
     year: string;
     image: string;
+    images: readonly string[];
     status: string;
 };
 
@@ -21,6 +23,7 @@ type ProjectDefinition = {
     slug: string;
     title: string;
     role: LocalizedText;
+    overviewTitle?: LocalizedText;
     description: LocalizedText;
     highlights: Record<SiteLocale, readonly string[]>;
     tech: readonly string[];
@@ -29,6 +32,7 @@ type ProjectDefinition = {
     featured: boolean;
     year: string;
     image: string;
+    images?: readonly string[];
     status: LocalizedText;
 };
 
@@ -40,31 +44,44 @@ const projectDefinitions: readonly ProjectDefinition[] = [
             en: "Frontend Development",
             "pt-BR": "Desenvolvimento Frontend",
         },
+        overviewTitle: {
+            en: "Project overview",
+            "pt-BR": "Visão geral do projeto",
+        },
         description: {
-            en: "I built ShapeOn as a high-impact landing page for a supplement store, focused on strong visual positioning, fast product discovery, and direct WhatsApp conversion.",
+            en: "I developed a modern and strategic landing page for ShapeOn, a supplement store focused on fitness and high-performance audiences. The project was created to deliver strong visual impact, strengthen the brand's digital presence, and drive direct customer conversion through WhatsApp. I handled the full process myself, from the visual concept and experience definition to the complete interface implementation.",
             "pt-BR":
-                "Desenvolvi o ShapeOn como uma landing page de impacto para uma loja de suplementos, com foco em posicionamento visual forte, descoberta rápida de produtos e conversão direta pelo WhatsApp.",
+                "Desenvolvi uma landing page moderna e estratégica para a ShapeOn, uma loja de suplementos voltada ao público fitness e de alta performance. O projeto foi criado com foco em impacto visual, fortalecimento da presença digital da marca e conversão direta de clientes através do WhatsApp. Todo o processo foi desenvolvido por mim, desde a concepção visual e definição da experiência até a implementação completa da interface.",
         },
         highlights: {
             en: [
-                "I created a dark, performance-oriented visual direction aligned with the supplement and fitness market.",
-                "I structured the page around a persuasive hero, product categories, trust points, testimonials, and contact flow.",
-                "I connected product and CTA actions to WhatsApp to reduce friction between interest and purchase intent.",
-                "I used React, Vite, TypeScript, Tailwind CSS, shadcn/ui, Lucide icons, and Motion for a polished responsive experience.",
+                "I created the full visual direction for the landing page, developing a modern identity aligned with the fitness market, focused on performance, contrast, and strong visual presence.",
+                "I planned and developed the full page structure around user experience, smooth navigation, and conversion, highlighting products, benefits, and strategic calls to action.",
+                "I developed a responsive interface optimized for different devices, ensuring a consistent experience on both desktop and mobile.",
+                "I implemented the full application using React, Vite, TypeScript, and Tailwind CSS, prioritizing performance, code organization, and interface scalability.",
+                "I worked on visual effects, composition, typographic hierarchy, and graphic elements to communicate a more premium and professional position for the brand.",
+                "I led the entire project independently, from the design and visual concept to the complete development of the landing page.",
             ],
             "pt-BR": [
-                "Criei uma direção visual escura e orientada a performance, alinhada ao mercado fitness e de suplementos.",
-                "Estruturei a página com hero persuasivo, categorias de produto, pontos de confiança, depoimentos e fluxo de contato.",
-                "Conectei produtos e chamadas de ação ao WhatsApp para reduzir o atrito entre interesse e intenção de compra.",
-                "Usei React, Vite, TypeScript, Tailwind CSS, shadcn/ui, ícones Lucide e Motion para entregar uma experiência responsiva mais refinada.",
+                "Criei toda a direção visual da landing page, desenvolvendo uma identidade moderna e alinhada ao mercado fitness, com foco em performance, contraste e presença visual forte.",
+                "Planejei e desenvolvi toda a estrutura da página pensando em experiência do usuário, navegação fluida e conversão, destacando produtos, benefícios e chamadas estratégicas para ação.",
+                "Desenvolvi uma interface responsiva e otimizada para diferentes dispositivos, garantindo uma experiência consistente tanto no desktop quanto no mobile.",
+                "Implementei toda a aplicação utilizando React, Vite, TypeScript e Tailwind CSS, priorizando performance, organização de código e escalabilidade da interface.",
+                "Trabalhei efeitos visuais, composição, hierarquia tipográfica e elementos gráficos para transmitir um posicionamento mais premium e profissional para a marca.",
+                "Conduzi todo o projeto de forma individual, atuando desde a criação do design e conceito visual até o desenvolvimento completo da landing page.",
             ],
         },
         tech: ["React", "Vite", "TypeScript", "Tailwind CSS"],
         github: "https://github.com/eikefrota/shapeon",
-        live: null,
+        live: "https://shapeon.vercel.app/",
         featured: true,
         year: "2026",
         image: "/images/projects/shapeon/mockup-shapeon-01.png",
+        images: [
+            "/images/projects/shapeon/mockup-shapeon-01.png",
+            "/images/projects/shapeon/mockup-shapeon-02.png",
+            "/images/projects/shapeon/mockup-shapeon-03.png",
+        ],
         status: {
             en: "Public repository",
             "pt-BR": "Repositório público",
@@ -140,8 +157,8 @@ const projectDefinitions: readonly ProjectDefinition[] = [
         year: "2025",
         image: "/images/projects/fastdish/fastdish.webp",
         status: {
-            en: "Live demo",
-            "pt-BR": "Demo online",
+            en: "Visit site",
+            "pt-BR": "Visitar site",
         },
     },
     {
@@ -177,8 +194,8 @@ const projectDefinitions: readonly ProjectDefinition[] = [
         year: "2024",
         image: "/images/projects/frotasgourmet/frotas-gourmet.webp",
         status: {
-            en: "Live demo",
-            "pt-BR": "Demo online",
+            en: "Visit site",
+            "pt-BR": "Visitar site",
         },
     },
 ];
@@ -188,6 +205,7 @@ function toProject(definition: ProjectDefinition, locale: SiteLocale): Project {
         slug: definition.slug,
         title: definition.title,
         role: definition.role[locale],
+        overviewTitle: definition.overviewTitle?.[locale],
         description: definition.description[locale],
         highlights: definition.highlights[locale],
         tech: definition.tech,
@@ -196,6 +214,7 @@ function toProject(definition: ProjectDefinition, locale: SiteLocale): Project {
         featured: definition.featured,
         year: definition.year,
         image: definition.image,
+        images: definition.images ?? [definition.image],
         status: definition.status[locale],
     };
 }
