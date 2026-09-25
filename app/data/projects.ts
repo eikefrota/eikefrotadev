@@ -38,6 +38,143 @@ type ProjectDefinition = {
 
 const projectDefinitions: readonly ProjectDefinition[] = [
     {
+        slug: "ef-sistemas",
+        title: "EF Sistemas",
+        role: {
+            en: "Full Stack Development",
+            "pt-BR": "Desenvolvimento Full Stack",
+        },
+        overviewTitle: {
+            en: "Project overview",
+            "pt-BR": "Visão geral do projeto",
+        },
+        description: {
+            en: "EF Sistemas is a multi-tenant SaaS platform for Occupational Health and Safety (SST) management, built for EF Consultoria and the companies it serves. I develop and maintain it end to end, from tenant isolation and role-based access to risk management, service orders, and automated document generation, in an active production environment.",
+            "pt-BR":
+                "O EF Sistemas é uma plataforma SaaS multi-tenant para gestão de Saúde e Segurança do Trabalho (SST), construída para a EF Consultoria e as empresas que ela atende. Desenvolvo e mantenho o sistema de ponta a ponta, do isolamento entre clientes e controle de acesso por perfil até a gestão de riscos, ordens de serviço e geração automatizada de documentos, em ambiente de produção ativo.",
+        },
+        highlights: {
+            en: [
+                "I develop and maintain a multi-tenant architecture where each client company operates in its own isolated environment, with role-based access for administrators, technicians, physicians, and viewers.",
+                "I built the PGR (Risk Management Program) module: risk inventory across the 6 categories required by Brazil's NR-1 regulation, a probability x severity matrix, and automatic action plans for critical risks.",
+                "I implemented per-role Service Orders that are issued individually to each worker as a frozen copy of the role template, so later template revisions never change what a worker already received.",
+                "I built automated multi-section PDF generation for technical documents and an administrative panel with operational indicators and dashboards.",
+                "The platform runs on Laravel, Vue.js 3, Inertia.js, TypeScript, and Tailwind CSS, deployed on a dedicated server with automatic deployment and close to 900 automated tests covering backend, frontend, and end-to-end flows.",
+            ],
+            "pt-BR": [
+                "Desenvolvo e mantenho uma arquitetura multi-tenant em que cada empresa-cliente opera em seu próprio ambiente isolado, com controle de acesso baseado em perfis de administrador, técnico, médico e visualizador.",
+                "Construí o módulo de PGR (Programa de Gerenciamento de Riscos): inventário de riscos cobrindo os 6 grupos exigidos pela NR-1, matriz de probabilidade x severidade e plano de ação automático para riscos críticos.",
+                "Implementei as Ordens de Serviço por cargo, emitidas individualmente para cada trabalhador como uma cópia congelada do template do cargo, de forma que revisões futuras no template não alterem o que o trabalhador já recebeu.",
+                "Construí a geração automatizada de documentos técnicos em PDF com múltiplas seções e um painel administrativo com indicadores e dashboards operacionais.",
+                "A plataforma roda em Laravel, Vue.js 3, Inertia.js, TypeScript e Tailwind CSS, com deploy automático em servidor próprio e cerca de 900 testes automatizados cobrindo backend, frontend e fluxos ponta a ponta.",
+            ],
+        },
+        tech: ["Laravel", "Vue.js 3", "Inertia.js", "TypeScript", "Tailwind CSS"],
+        github: null,
+        live: "https://efsistemas.cloud",
+        featured: true,
+        year: "2026",
+        image: "/images/projects/efsistemas/efsistemas-mockup-01.webp",
+        images: [
+            "/images/projects/efsistemas/efsistemas-mockup-01.webp",
+            "/images/projects/efsistemas/efsistemas-mockup-02.webp",
+        ],
+        status: {
+            en: "In production",
+            "pt-BR": "Em produção",
+        },
+    },
+    {
+        slug: "ef-consultoria",
+        title: "EF Consultoria",
+        role: {
+            en: "Full Stack Development",
+            "pt-BR": "Desenvolvimento Full Stack",
+        },
+        overviewTitle: {
+            en: "Project overview",
+            "pt-BR": "Visão geral do projeto",
+        },
+        description: {
+            en: "I built the institutional site for EF Consultoria, a workplace safety engineering and legal consultancy with over 18 years in the market. It runs on the same Laravel/Inertia/Vue platform as the EF Sistemas product, served on its own domain, and translates the consultancy's technical credibility into a dark, gold-accented visual identity.",
+            "pt-BR":
+                "Desenvolvi o site institucional da EF Consultoria, uma consultoria de engenharia de segurança do trabalho e assessoria jurídica com mais de 18 anos de atuação. O site roda na mesma plataforma Laravel/Inertia/Vue do EF Sistemas, servido em domínio próprio, e traduz a credibilidade técnica da consultoria numa identidade visual escura com detalhes dourados.",
+        },
+        highlights: {
+            en: [
+                "I built the full landing page inside the existing Laravel/Inertia/Vue codebase, served on its own custom domain through the platform's multi-domain routing.",
+                "I structured the page around credibility signals — years of activity, reference clients, delivery rate — right above the fold, before any service description.",
+                "I implemented sections for services, team, client portfolio, and an NR fine-risk calculator used as a lead-generation tool.",
+                "I built a responsive interface consistent across desktop and mobile, reusing the design system shared with the EF Sistemas product.",
+            ],
+            "pt-BR": [
+                "Construí toda a landing page dentro do código já existente da plataforma Laravel/Inertia/Vue, servida em domínio próprio através do roteamento multi-domínio da plataforma.",
+                "Estruturei a página em torno de sinais de credibilidade — anos de atuação, clientes de referência, taxa de entrega — logo acima da dobra, antes de qualquer descrição de serviço.",
+                "Implementei as seções de serviços, equipe, portfólio de clientes e uma calculadora de risco de multa por NR usada como ferramenta de captação de leads.",
+                "Desenvolvi uma interface responsiva e consistente entre desktop e mobile, reaproveitando o design system compartilhado com o produto EF Sistemas.",
+            ],
+        },
+        tech: ["Laravel", "Vue.js 3", "Inertia.js", "Tailwind CSS"],
+        github: null,
+        live: "https://emiliofrotaconsultoria.com.br",
+        featured: true,
+        year: "2026",
+        image: "/images/projects/efconsultoria/efconsultoria-mockup-01.webp",
+        images: [
+            "/images/projects/efconsultoria/efconsultoria-mockup-01.webp",
+            "/images/projects/efconsultoria/efconsultoria-mockup-02.webp",
+        ],
+        status: {
+            en: "Visit site",
+            "pt-BR": "Visitar site",
+        },
+    },
+    {
+        slug: "ef-advocacia",
+        title: "EF Advocacia",
+        role: {
+            en: "Full Stack Development",
+            "pt-BR": "Desenvolvimento Full Stack",
+        },
+        overviewTitle: {
+            en: "Project overview",
+            "pt-BR": "Visão geral do projeto",
+        },
+        description: {
+            en: "I built the institutional site for Emílio Frota Advocacia, a labor and business law practice with 15 years of experience. It shares the same Laravel/Inertia/Vue platform as EF Consultoria and EF Sistemas, with its own navy-and-gold identity to set the legal practice apart from the engineering consultancy.",
+            "pt-BR":
+                "Desenvolvi o site institucional da Emílio Frota Advocacia, um escritório de advocacia trabalhista e empresarial com 15 anos de experiência. Ele roda na mesma plataforma Laravel/Inertia/Vue da EF Consultoria e do EF Sistemas, com identidade própria em azul-marinho e dourado, para diferenciar o escritório de advocacia da consultoria de engenharia.",
+        },
+        highlights: {
+            en: [
+                "I built a second institutional site on the same shared platform, with a distinct navy-and-gold identity to separate the law practice from the engineering consultancy's brand.",
+                "I structured the hero around the practice's specialty (labor law) and experience, with direct calls to action to book a consultation.",
+                "I set up its own custom domain on the platform's multi-domain routing, alongside EF Consultoria and EF Sistemas.",
+                "I kept the same component system and interaction patterns from EF Consultoria, adapting only typography and color to fit a law firm's tone.",
+            ],
+            "pt-BR": [
+                "Construí um segundo site institucional na mesma plataforma compartilhada, com identidade própria em azul-marinho e dourado para separar o escritório de advocacia da marca da consultoria de engenharia.",
+                "Estruturei a hero em torno da especialidade do escritório (direito trabalhista) e da experiência acumulada, com chamadas diretas para agendar uma consulta.",
+                "Configurei um domínio próprio dentro do roteamento multi-domínio da plataforma, ao lado da EF Consultoria e do EF Sistemas.",
+                "Mantive o mesmo sistema de componentes e padrões de interação da EF Consultoria, ajustando apenas tipografia e cor para o tom de um escritório de advocacia.",
+            ],
+        },
+        tech: ["Laravel", "Vue.js 3", "Inertia.js", "Tailwind CSS"],
+        github: null,
+        live: "https://emiliofrotaadvocacia.com.br",
+        featured: true,
+        year: "2026",
+        image: "/images/projects/efadvocacia/efadvocacia-mockup-01.webp",
+        images: [
+            "/images/projects/efadvocacia/efadvocacia-mockup-01.webp",
+            "/images/projects/efadvocacia/efadvocacia-mockup-02.webp",
+        ],
+        status: {
+            en: "Visit site",
+            "pt-BR": "Visitar site",
+        },
+    },
+    {
         slug: "shapeon",
         title: "ShapeOn",
         role: {
@@ -93,6 +230,10 @@ const projectDefinitions: readonly ProjectDefinition[] = [
         role: {
             en: "Full Stack Development",
             "pt-BR": "Desenvolvimento Full Stack",
+        },
+        overviewTitle: {
+            en: "Project overview",
+            "pt-BR": "Visão geral do projeto",
         },
         description: {
             en: "I built QuizDev as a mobile-first full stack experience that brings together React Native, backend logic, and persisted data in a compact product flow.",
@@ -180,6 +321,10 @@ const projectDefinitions: readonly ProjectDefinition[] = [
         role: {
             en: "Frontend Development",
             "pt-BR": "Desenvolvimento Frontend",
+        },
+        overviewTitle: {
+            en: "Project overview",
+            "pt-BR": "Visão geral do projeto",
         },
         description: {
             en: "I designed Frota's Gourmet as a digital menu experience centered on mobile clarity, direct conversion, and organized information.",

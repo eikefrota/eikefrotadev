@@ -178,8 +178,9 @@ export const SITE_IDENTITY = {
   githubProfile: "https://github.com/eikefrota",
   instagram: "https://www.instagram.com/eikefrotaa",
   whatsappNumber: "+55 85 99906-2339",
-  whatsapp: "https://wa.me/5585999062339?text=Fala%20Eike,%20vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar.",
-  siteUrl: "https://eikefrotadev.netlify.app",
+  whatsapp:
+    "https://wa.me/5585999062339?text=Fala%20Eike,%20vi%20seu%20portf%C3%B3lio%20e%20quero%20conversar.",
+  siteUrl: "https://eikefrota.vercel.app",
 } as const;
 
 const SHARED_TECH_STACKS: readonly {
@@ -456,21 +457,21 @@ const siteContentByLocale: Record<SiteLocale, LocaleContent> = {
       rights: "Software Developer",
       note: "Portfolio 2026",
     },
-        projectsHome: {
-            sectionAriaLabel: "Projects",
-            mobileTitle: "Featured Work",
-            mobileDescription:
-                "Four public projects that show how I currently work across frontend, mobile-first flows, and product-oriented implementation.",
-            desktopEyebrow: "Recent work",
-            desktopTitleLine1: "Featured",
-            desktopTitleLine2: "Projects",
-            desktopDescription:
-                "Some projects that show how I work in my day-to-day, from building interfaces to integrations and evolving systems.",
-            viewAllLabel: "View all",
-            scrubHint: "Scroll to explore - Click a project to open",
-            progressLabel: "Project",
-            projectCountLabel: "of",
-        },
+    projectsHome: {
+      sectionAriaLabel: "Projects",
+      mobileTitle: "Featured Work",
+      mobileDescription:
+        "Four public projects that show how I currently work across frontend, mobile-first flows, and product-oriented implementation.",
+      desktopEyebrow: "Recent work",
+      desktopTitleLine1: "Featured",
+      desktopTitleLine2: "Projects",
+      desktopDescription:
+        "Some projects that show how I work in my day-to-day, from building interfaces to integrations and evolving systems.",
+      viewAllLabel: "View all",
+      scrubHint: "Scroll to explore - Click a project to open",
+      progressLabel: "Project",
+      projectCountLabel: "of",
+    },
     projectsPage: {
       pageAriaLabel: "All projects",
       eyebrow: "Portfolio",
@@ -704,21 +705,21 @@ const siteContentByLocale: Record<SiteLocale, LocaleContent> = {
       rights: "Desenvolvedor de Software",
       note: "Portfólio 2026",
     },
-        projectsHome: {
-            sectionAriaLabel: "Projetos",
-            mobileTitle: "Projetos em Destaque",
-            mobileDescription:
-                "Quatro projetos públicos que mostram como eu trabalho hoje entre frontend, fluxos mobile-first e implementação orientada a produto.",
-            desktopEyebrow: "Trabalhos recentes",
-            desktopTitleLine1: "Projetos",
-            desktopTitleLine2: "em Destaque",
-            desktopDescription:
-                "Alguns projetos que mostram como eu trabalho no dia a dia, desde a construção de interfaces até integrações e evolução de sistemas.",
-            viewAllLabel: "Ver todos",
-            scrubHint: "Role para explorar - Clique em um projeto para abrir",
-            progressLabel: "Projeto",
-            projectCountLabel: "de",
-        },
+    projectsHome: {
+      sectionAriaLabel: "Projetos",
+      mobileTitle: "Projetos em Destaque",
+      mobileDescription:
+        "Quatro projetos públicos que mostram como eu trabalho hoje entre frontend, fluxos mobile-first e implementação orientada a produto.",
+      desktopEyebrow: "Trabalhos recentes",
+      desktopTitleLine1: "Projetos",
+      desktopTitleLine2: "em Destaque",
+      desktopDescription:
+        "Alguns projetos que mostram como eu trabalho no dia a dia, desde a construção de interfaces até integrações e evolução de sistemas.",
+      viewAllLabel: "Ver todos",
+      scrubHint: "Role para explorar - Clique em um projeto para abrir",
+      progressLabel: "Projeto",
+      projectCountLabel: "de",
+    },
     projectsPage: {
       pageAriaLabel: "Todos os projetos",
       eyebrow: "Portfólio",
